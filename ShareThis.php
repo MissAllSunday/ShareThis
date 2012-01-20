@@ -4,7 +4,7 @@
  * @package ShareThis Topic mod
  * @version 4.0
  * @author Suki <missallsunday@simplemachines.org>
- * @copyright 2012 Suki
+ * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
  */
 
@@ -37,7 +37,7 @@
 if (!defined('SMF'))
 	die('Hacking attempt...');
 
-	/* Wrapper function for SMF */
+	/* Wrapper function for SMF*/
 	function ShareThis_SubActions(){ShareThis::SubActions();};
 
 class ShareThis
@@ -50,11 +50,11 @@ class ShareThis
 	private $prebuttons = array();
 	protected $final;
 	protected $enable;
-	private $page_title_html_safe;
-	private $forum_name;
 
 	function __construct($url, $msgID)
 	{
+		global $modSettings, $context;
+
 		if (!empty($url))
 			$this->url = trim($url);
 
@@ -65,9 +65,7 @@ class ShareThis
 		elseif (empty($url) || empty($msgID))
 			return;
 
-		global $context;
-
-		$this->page_title_html_safe = $context['page_title_html_safe'];
+		/* Replace the spaces (if any) in the forum name to  make a cool "via @my_forum_name" for twitter */
 		$this->forum_name = str_replace(' ', '_', $context['forum_name']);
 	}
 
@@ -75,7 +73,7 @@ class ShareThis
 	 * @todo make a method the add custom buttons to the array*/
 	public function CreateButtons()
 	{
-		global $modSettings, $txt;
+		global $modSettings, $txt, $context;
 
 		loadLanguage('ShareThis');
 
@@ -91,7 +89,7 @@ class ShareThis
 		$this->temp['twitter'] = array(
 			'name' => 'twitter',
 			'url' => $this->url,
-			'code' => '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'. $this->url .'" data-text="'. $this->page_title_html_safe .'" rel="canonical" data-via="'. $this->forum_name .'">'. $txt['tweet_name'] .'</a>',
+			'code' => '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'. $this->url .'" data-text="'. $context['page_title_html_safe'] .'" rel="canonical" data-via="'. $this->forum_name .'">'. $txt['tweet_name'] .'</a>',
 			'enable' => !empty($modSettings['share_twibutton_enable']) ? 1 : 0,
 		);
 
@@ -101,6 +99,14 @@ class ShareThis
 			'url' => $this->url,
 			'code' => '<g:plusone size="medium" href="'. $this->url .'"></g:plusone>',
 			'enable' => !empty($modSettings['share_plusone_enable']) ? 1 : 0
+		);
+
+		/* AddThis script */
+		$this->temp['addthis'] = array(
+			'name' => 'addthis',
+			'url' => $this->url,
+			'code' => '<span class="addthis_toolbox addthis_default_style"addthis:url="'. $this->url .'"><a class="addthis_button"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" style="border:0"/></a></a></span>',
+			'enable' => !empty($modSettings['share_addthismessages_enable']) ? 1 : 0
 		);
 
 		/* Add the buttons */
@@ -250,6 +256,14 @@ class ShareThis
 		$config_vars = array(
 			array('check', 'share_all_messages', 'subtext' => $txt['share_all_messages_sub']),
 			array('text', 'share_options_boards', 'size' => 36, 'subtext' => $txt['share_options_boards_sub']),
+			array(
+				'select',
+				'share_options_position', array(
+					'below' => $txt['share_options_position_below'],
+					'above' => $txt['share_options_position_above']
+				),
+				'subtext' => $txt['share_options_position_sub']
+			),
 			'',
 			array('check', 'share_addthisbutton_enable', 'subtext' => $txt['share_addthisbutton_enable_sub']),
 		);
@@ -262,16 +276,13 @@ class ShareThis
 
 		if (isset($_GET['save']))
 		{
-			if (!empty($_POST['share_options_boards']))
-			{
-				$share_options_boards = explode(',', preg_replace('/[^0-9,]/', '', $_POST['share_options_boards']));
+			$_POST['share_options_boards'] = explode(',', preg_replace('/[^0-9,]/', '', $_POST['share_options_boards']));
 
-				foreach ($share_options_boards as $key => $value)
-					if ($value == '')
-						unset($share_options_boards[$key]);
+			foreach ($_POST['share_options_boards'] as $key => $value)
+				if ($value == '')
+					unset($_POST['share_options_boards'][$key]);
 
-				$_POST['share_options_boards'] = implode(',', $share_options_boards);
-			}
+			$_POST['share_options_boards'] = implode(',', $_POST['share_options_boards']);
 
 			checkSession();
 			saveDBSettings($config_vars);
@@ -296,6 +307,7 @@ class ShareThis
 			array('check', 'share_plusone_enable'),
 			array('check', 'share_twibutton_enable'),
 			array('check', 'share_likebutton_enable'),
+			array('check', 'share_addthismessages_enable', 'subtext' => $txt['share_addthismessages_enable_sub'])
 		);
 
 		if ($return_config)
@@ -331,6 +343,7 @@ class ShareThis
 			<!-- Share This Topic Mod -->
 <script type="text/javascript">!window.jQuery && document.write(unescape(\'%3Cscript src="http://code.jquery.com/jquery.min.js"%3E%3C/script%3E\'))</script>
 <script type="text/javascript" src="'. $settings['default_theme_url'] .'/scripts/jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f0f3b943805e0af"></script>
 ';
 
 		/* Don't show this if the mod is not enable */
@@ -354,9 +367,19 @@ class ShareThis
 	text-align: left;
 	list-style-position:inside !important;
 }
-#sharethis ul li {
+#sharethis ul li
+{
 	display: inline;
 }
+'. (!empty($modSettings['share_addthismessages_enable']) ? '
+#sharethis ul li.sharethis_addthis
+{
+	float:left;
+	margin-right:15px;
+}
+' : '') .'
+
+
 .sharethis_twitter, .sharethis_google
 {
 '. (!empty($modSettings['share_likebutton_enable']) ? '
@@ -364,6 +387,16 @@ class ShareThis
 	top: -60px;
 ' : '') .'
 }
+
+'. (!empty($modSettings['share_addthisbutton_enable']) ? '
+.sharethis_addthis_script
+{
+	float: right;
+	display:inline;
+	position:relative;
+	top: -20px;
+}
+' : '') .'
 
 </style>';
 
@@ -376,25 +409,42 @@ class ShareThis
 		/* @todo Let the admin decide what actions they want to share */
 		/* I'ts more easy to identify the actions where the script will be showed rather than the actions where it won't be showed */
 		$addthis_show = array(
-			'calendar',
 			'display',
 			'profile'
 		);
+		
+		/* We need an array */
+		if (!empty($modSettings['share_options_boards']))
+			$share_options_boards = explode(',', $modSettings['share_options_boards']);
 
-		if (!empty($modSettings['share_addthisbutton_enable']))
+		else
+			$share_options_boards = array();
+
+		/* Show the script on a board or topic only if it isn't denied to show in the settings */
+		if (!empty($modSettings['share_addthisbutton_enable']) && !empty($context['current_board']) && !in_array($context['current_board'], $share_options_boards) && isset($_REQUEST['topic']) || isset($_REQUEST['board']))
+			$context['html_headers'] .= '
+			<script type="text/javascript">
+		jQuery(document).ready(function($)
 		{
-			if (in_array($context['current_action'], $addthis_show) || isset($_REQUEST['topic']) || !isset($_REQUEST['action']))
-				$context['html_headers'] .= '<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f0f3b943805e0af"></script>
-				<script type="text/javascript">
-			jQuery(document).ready(function($)
+			jQuery(function()
 			{
-				jQuery(function()
-				{
-					jQuery(\'.pagesection\').append(\'<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0f51eb17eb2a19"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" style="border:0"/></a>\');
-				});
+				jQuery(\'.navigate_section\').append(\'<span class="sharethis_addthis_script"><a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0f51eb17eb2a19"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" style="border:0"/></a></span>\');
 			});
-			</script>';
-		}
+		});
+		</script>';
+
+		/* We aren't in a board and we are on a OK action */
+		elseif (!empty($modSettings['share_addthisbutton_enable']) && in_array($context['current_action'], $addthis_show) && empty($context['current_board']))
+			$context['html_headers'] .= '
+			<script type="text/javascript">
+		jQuery(document).ready(function($)
+		{
+			jQuery(function()
+			{
+				jQuery(\'.navigate_section\').append(\'<span class="sharethis_addthis_script"><a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0f51eb17eb2a19"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" style="border:0"/></a></span>\');
+			});
+		});
+		</script>';
 	}
 }
 	/* Se que volverás el día

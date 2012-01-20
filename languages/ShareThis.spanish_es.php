@@ -44,8 +44,10 @@ $txt['share_all_messages'] = '¿Mostrar los botones y los iconos en todos los men
 $txt['share_all_messages_sub'] = 'Si se deja vacio, se mostrarán solo en el primer mensaje.';
 $txt['share_options_boards'] = 'Escribe el ID de los foros en los cuales este mod NO se mostrará.';
 $txt['share_options_boards_sub'] = 'Separados por coma, ejemplo: 1,2,3,4,  déjalo en blanco ara mostrar los iconos y botones en todos tus foros';
-$txt['share_use_javascript'] = '¿Usar JavaScript para ocultar los botones y los iconos?';
-$txt['share_use_javascript_sub'] = 'Usa esta opción si deseas ocultar los botones con JavaScript, esto ayuda a conservar espacio en tus temas, es altamente recomendado que uses esta opción.';
+$txt['share_options_position'] = 'Select the position for the buttons.';
+$txt['share_options_position_sub'] = 'Above: Will show the buttons before the actual message.<br />Below: Will show the buttons after the message.';
+$txt['share_options_position_above'] = 'Above';
+$txt['share_options_position_below'] = 'Below';
 
 // Buttons Settings
 $txt['share_buttons_settings'] = 'Opciones de botones';

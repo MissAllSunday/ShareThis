@@ -44,14 +44,18 @@ $txt['share_all_messages'] = 'Show the buttons every message?';
 $txt['share_all_messages_sub'] = 'If empty, the buttons and icons will be showed <strong>only</strong> in the first message.';
 $txt['share_options_boards'] = 'Write the ID of the boards you <strong>DO NOT</strong> want to show the buttons.';
 $txt['share_options_boards_sub'] = 'Comma separate, example: 1,2,3,4,  Leave it in blank to show the buttons on every board';
-$txt['share_use_javascript'] = 'Use javascript to hide the buttons and icons?';
-$txt['share_use_javascript_sub'] = 'Use this option if you want to hide the buttons using JavaScript, this helps to save some space on large topics, highly recommended.';
+$txt['share_options_position'] = 'Select the position for the buttons.';
+$txt['share_options_position_sub'] = 'Above: Will show the buttons before the actual message.<br />Below: Will show the buttons after the message.';
+$txt['share_options_position_above'] = 'Above';
+$txt['share_options_position_below'] = 'Below';
 
 /* // Buttons Settings */
 $txt['share_buttons_settings'] = 'Button Settings';
 $txt['share_buttons_enable'] = 'Enable the share buttons.';
 $txt['share_buttons_enable_sub'] = 'This is the master setting for the buttons, check it to enable the buttons.';
 $txt['share_likebutton_enable'] = 'Enable the Facebook Like Button.';
+$txt['share_addthismessages_enable'] = 'Enable the AddThis script for the messages.';
+$txt['share_addthismessages_enable_sub'] = 'This will include the AddThis script along with the rest of the buttons.';
 $txt['share_addthisbutton_enable'] = 'Enable the AddThis script.';
 $txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-BoardIndex<br />-Profile<br />-Topic page.<br />
 the Addthis script will share the entire page rather than an specific part of the forum.';

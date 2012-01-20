@@ -29,15 +29,33 @@
 		$suki =  new ShareThis($shareurl, $message['id_msg']);
 		$suki->CreateButtons();
 
+		/* Default */
+		$share_dummy = '';
+
+		/* Switch here! */
+		if (!empty($modSettings['share_options_position']))
+			switch ($modSettings['share_options_position'])
+			{
+				case 'above':
+					$share_dummy = $suki->Display() . $message['body'];
+					break;
+				case 'below':
+					$share_dummy = $message['body'] . $suki->Display();
+					break;
+			}
+
+		elseif (empty($modSettings['share_options_position']))
+			$share_dummy = $message['body'] . $suki->Display();
+
 		if (!empty($modSettings['share_all_messages']) && !in_array($board_info['id'], $share_options_boards))
-				$message['body'] = ($message['body'].$suki->Display());
+				$message['body'] = $share_dummy;
 
 		elseif (empty($modSettings['share_all_messages']) && $counter == 0 && empty($options['view_newest_first']) && !in_array($board_info['id'], $share_options_boards))
-			$message['body'] = ($message['body'].$suki->Display());
+			$message['body'] = $share_dummy;
 
 		/* Special case for when the "recent first" option is enable */
 		elseif (empty($modSettings['share_all_messages']) && $counter == 1 && !empty($options['view_newest_first']) && !in_array($board_info['id'], $share_options_boards))
-			$message['body'] = ($message['body'].$suki->Display());
+			$message['body'] = $share_dummy;
 	}
 	/* Share this topic mod end */
 

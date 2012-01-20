@@ -276,13 +276,16 @@ class ShareThis
 
 		if (isset($_GET['save']))
 		{
-			$_POST['share_options_boards'] = explode(',', preg_replace('/[^0-9,]/', '', $_POST['share_options_boards']));
+			if (!empty($_POST['share_options_boards']))
+			{
+				$share_options_boards = explode(',', preg_replace('/[^0-9,]/', '', $_POST['share_options_boards']));
 
-			foreach ($_POST['share_options_boards'] as $key => $value)
-				if ($value == '')
-					unset($_POST['share_options_boards'][$key]);
+				foreach ($share_options_boards as $key => $value)
+					if ($value == '')
+						unset($share_options_boards[$key]);
 
-			$_POST['share_options_boards'] = implode(',', $_POST['share_options_boards']);
+				$_POST['share_options_boards'] = implode(',', $share_options_boards);
+			}
 
 			checkSession();
 			saveDBSettings($config_vars);

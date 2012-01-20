@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>Suki:Share_This_Topic</id>
+	<version>4.0</version>
+	<file name="$sourcedir/Display.php">
+	<operation>
+			<search position="replace"><![CDATA[global $memberContext, $context, $messages_request, $topic, $attachments, $topicinfo;]]></search>
+			<add><![CDATA[global $memberContext, $context, $messages_request, $topic, $attachments, $topicinfo;
+	global $board_info;]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[	// Do the censor thang.]]></search>
+			<add><![CDATA[		/* Share This topic mod start */
+	if (!empty($modSettings['share_buttons_enable']))
+	{
+		/* We need an array */
+		if (!empty($modSettings['share_options_boards']))
+			$share_options_boards = explode(',', $modSettings['share_options_boards']);
+
+		else
+			$share_options_boards = array();
+
+		/* Define the url to share */
+		$shareurl = $scripturl . '?topic=' . $topic . '.msg' . $message['id_msg'];
+
+		/* Create the buttons */
+		$suki =  new ShareThis($shareurl, $message['id_msg']);
+		$suki->CreateButtons();
+
+		if (!empty($modSettings['share_all_messages']) && !in_array($board_info['id'], $share_options_boards))
+				$message['body'] = ($message['body'].$suki->Display());
+
+		elseif (empty($modSettings['share_all_messages']) && $counter == 0 && empty($options['view_newest_first']) && !in_array($board_info['id'], $share_options_boards))
+			$message['body'] = ($message['body'].$suki->Display());
+
+		/* Special case for when the "recent first" option is enable */
+		elseif (empty($modSettings['share_all_messages']) && $counter == 1 && !empty($options['view_newest_first']) && !in_array($board_info['id'], $share_options_boards))
+			$message['body'] = ($message['body'].$suki->Display());
+	}
+	/* Share this topic mod end */
+
+]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Who.php">
+	<operation>
+			<search position="replace"><![CDATA[		'mods' => array(]]></search>
+			<add><![CDATA[		'mods' => array(
+			Sharethis::ShareThisWho(),]]></add>
+		</operation>
+	</file>
+
+	<file name="$sourcedir/Load.php">
+	<operation>
+			<search position="replace"><![CDATA[// Set some permission related settings.]]></search>
+			<add><![CDATA[
+	ShareThis::Headers();
+
+	// Set some permission related settings.]]></add>
+		</operation>
+	</file>
+
+</modification>

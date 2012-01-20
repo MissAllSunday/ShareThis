@@ -1,0 +1,12 @@
+<div style="padding: 10px;">
+	<div style="border-bottom: 1px dashed; padding-bottom: 5px; width: 500px; font-weight: bold; font-size: 130%;">Installation Complete | Instalaci&oacute;n Completa</div>
+	
+	<p>Hope you like the mod! ^^ </p>
+	<p>You are now been redirected to the mod settings...</p>
+
+<hr>
+
+<p>espero que te agrade este mod </p>
+	<p>Ahora estas siendo redirigido a la p&aacute;gina de configuraci&oacute;n...</p>
+
+</div>

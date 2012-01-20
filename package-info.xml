@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<id>Suki:Share_This_Topic</id>
+	<name>Share This Topic</name>
+	<version>4.0</version>
+	<type>modification</type>
+
+	<install for="2.0 - 2.0.99">
+	<readme parsebbc="true">readme.txt</readme>
+		<code>install.php</code>
+		<modification type="file">ShareThis.xml</modification>
+		<require-file name="ShareThis.php" destination="$sourcedir" />
+		<require-file name="jquery.hoverIntent.minified.js" destination="$themedir/scripts" />
+		<require-dir name="languages" destination="$themedir" />
+		<redirect url="$scripturl?action=admin;area=sharethis" timeout="3000">redirect.txt</redirect>
+	</install>
+
+	<uninstall for="2.0 - 2.0.99">
+		<code>remove.php</code>
+		<modification type="file" reverse="true">ShareThis.xml</modification>
+		<remove-file name="$sourcedir/ShareThis.php" />
+		<remove-file name="$themedir/scripts/jquery.hoverIntent.minified.js" />
+		<remove-file name="$languagedir/ShareThis.english.php" />
+		<remove-file name="$languagedir/ShareThis.english-utf8.php" />
+		<remove-file name="$languagedir/ShareThis.english_british.php" />
+		<remove-file name="$languagedir/ShareThis.english_british-utf8.php" />
+		<remove-file name="$languagedir/ShareThis.spanish_es.php" />
+		<remove-file name="$languagedir/ShareThis.spanish_es-utf8.php" />
+		<remove-file name="$languagedir/ShareThis.spanish_latin.php" />
+		<remove-file name="$languagedir/ShareThis.spanish_latin-utf8.php" />
+	</uninstall>
+</package-info>

@@ -265,28 +265,35 @@ class ShareThis
 	 * Build the JavaScript for each message
 	 *
 	 * @access private
+	 * @global array $modSettings
 	 * @return string the JavaScript code without any spaces or tabs.
 	 */
 	private function JS()
 	{
-		$js = '<script type="text/javascript">
-		jQuery(document).ready(function($)
+		if (empty($modSettings['share_disable_jquery']))
 		{
-			jQuery(function()
+			$js = '<script type="text/javascript">
+			jQuery(document).ready(function($)
 			{
-				jQuery("#msg_'. $this->msgID .'").css("min-height", "50px");
-				jQuery("#msg_'. $this->msgID .'").hoverIntent(function()
+				jQuery(function()
 				{
-				jQuery("#msg_'. $this->msgID .'").css("overflow-y", "hidden");
-				jQuery(".sharethis_'. $this->msgID .'").delay(100).fadeIn();
-				},function(){
-						jQuery(".sharethis_'. $this->msgID .'").delay(300).fadeOut();
-					});
+					jQuery("#msg_'. $this->msgID .'").css("min-height", "50px");
+					jQuery("#msg_'. $this->msgID .'").hoverIntent(function()
+					{
+					jQuery("#msg_'. $this->msgID .'").css("overflow-y", "hidden");
+					jQuery(".sharethis_'. $this->msgID .'").delay(100).fadeIn();
+					},function(){
+							jQuery(".sharethis_'. $this->msgID .'").delay(300).fadeOut();
+						});
+				});
 			});
-		});
-		</script>';
+			</script>';
 
-		return $js = str_replace(array("\r\n", "\r", "\n", "\t"), '', $js);
+			return $js = str_replace(array("\r\n", "\r", "\n", "\t"), '', $js);
+		}
+
+		else
+			return $js = '';
 	}
 
 	/**
@@ -375,6 +382,7 @@ class ShareThis
 		/* Generate the settings */
 		$config_vars = array(
 			array('check', 'share_all_messages', 'subtext' => $txt['share_all_messages_sub']),
+			array('check', 'share_disable_jquery', 'subtext' => $txt['share_disable_jquery_sub']),
 			array('text', 'share_options_boards', 'size' => 36, 'subtext' => $txt['share_options_boards_sub']),
 			array(
 				'select',

@@ -48,6 +48,8 @@ $txt['share_options_position'] = 'Select the position for the buttons.';
 $txt['share_options_position_sub'] = 'Above: Will show the buttons before the actual message.<br />Below: Will show the buttons after the message.';
 $txt['share_options_position_above'] = 'Above';
 $txt['share_options_position_below'] = 'Below';
+$txt['share_disable_jquery'] = 'Disable the jQuery effect.';
+$txt['share_disable_jquery_sub'] = 'This will disable the jQuery effect making your buttons visible all the time.';
 
 // Buttons Settings
 $txt['share_buttons_settings'] = 'Opciones de botones';

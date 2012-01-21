@@ -270,6 +270,8 @@ class ShareThis
 	 */
 	private function JS()
 	{
+		global $modSettings;
+
 		if (empty($modSettings['share_disable_jquery']))
 		{
 			$js = '<script type="text/javascript">
@@ -289,11 +291,21 @@ class ShareThis
 			});
 			</script>';
 
-			return $js = str_replace(array("\r\n", "\r", "\n", "\t"), '', $js);
 		}
 
+		/* We just need the overflow */
 		else
-			return $js = '';
+			$js = '<script type="text/javascript">
+			jQuery(document).ready(function($)
+			{
+				jQuery(function()
+				{
+					jQuery("#msg_'. $this->msgID .'").css("overflow-y", "hidden");
+				});
+			});
+			</script>';
+
+		return $js = str_replace(array("\r\n", "\r", "\n", "\t"), '', $js);
 	}
 
 	/**
@@ -507,12 +519,12 @@ class ShareThis
 ';
 
 		/* Don't show this if the mod is not enable */
-		if (!empty($modSettings['share_buttons_enable']))
+		if (!empty($modSettings['share_buttons_enable']) || !empty($modSettings['share_addthisbutton_enable']))
 			$context['html_headers'] .= '
 <style type="text/css">
 #sharethis
 {
-	display:none;
+	'. (!empty($modSettings['share_disable_jquery']) ? 'display:visible' : 'display:none;') . '
 	position:relative;
 	top:5px;
 	left:5px;

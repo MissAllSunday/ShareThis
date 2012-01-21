@@ -23,7 +23,7 @@
 			$share_options_boards = array();
 
 		/* Define the url to share */
-		$shareurl = $scripturl . '?topic=' . $topic . '.msg' . $message['id_msg'];
+		$shareurl = $scripturl . '?topic=' . $topic . '.msg' . $message['id_msg'] . '#msg' . $message['id_msg'];
 
 		/* Create the buttons */
 		$suki =  new ShareThis($shareurl, $message['id_msg']);

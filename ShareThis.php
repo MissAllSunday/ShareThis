@@ -37,20 +37,63 @@
 if (!defined('SMF'))
 	die('Hacking attempt...');
 
-	/* Wrapper function for SMF*/
+	/**
+	 * Wrapper function
+	 *
+	 * SMF cannot handle static methods being called via a variable: $static_method();
+	 */
 	function ShareThis_SubActions(){ShareThis::SubActions();};
 
+/**
+ * Share This Class
+ *
+ * Main class. handles everything
+ * @package ShareThis Topic mod
+ * @todo Build a method to easily use the buttons on external pages/modules/plugins etc
+ * @todo build a method to add custom buttons to the $temp array
+ */
 class ShareThis
 {
+	/**
+	 * @var array Gathers the buttons with a unique ID
+	 * @access private
+	 */
 	private $build = array();
+	/**
+	 * @var int The message ID, used for identification.
+	 * @access private
+	 */
 	private $msgID;
+	/**
+	 * @var string The url to be used by the buttons
+	 * @access private
+	 */
 	private $url;
+	/**
+	 * @var array Used to store the initial data for the buttons.
+	 * @access private
+	 */
 	private $temp = array();
-	private $html;
+	/**
+	 * @var array Holds only the usable buttons (those that are enable).
+	 * @access private
+	 */
 	private $prebuttons = array();
+	/**
+	 * @var string Holds the final HTML that will be displayed.
+	 * @access protected
+	 */
 	protected $final;
-	protected $enable;
 
+	/**
+	 * Initialize the mod and it's settings.
+	 *
+	 * @global array $modSettings SMF's modSettings variable
+	 * @global array $context SMF's context variable
+	 * @param string $url The url to be used by the buttons
+	 * @param int $msgID The message's unique ID
+	 * @return void
+	 */
 	function __construct($url, $msgID)
 	{
 		global $modSettings, $context;
@@ -61,7 +104,6 @@ class ShareThis
 		if (!empty($msgID))
 			$this->msgID = $msgID;
 
-		/* @todo for 4.1, build a method to easily use the buttons on external pages/modules/plugins etc */
 		elseif (empty($url) || empty($msgID))
 			return;
 
@@ -69,12 +111,22 @@ class ShareThis
 		$this->forum_name = str_replace(' ', '_', $context['forum_name']);
 	}
 
-	/* Create the buttons with some parameters as an array
-	 * @todo make a method the add custom buttons to the array*/
+	/**
+	 * Holds the initial data for the buttons
+	 *
+	 * Each item in the array must contain a name, url, code and enable value
+	 * @global array $modSettings SMF's modSettings array
+	 * @global array $context SMF's context array
+	 * @global array $txt SMF's language strings array
+	 * @todo call a method to add custom buttons to the $temp array
+	 * @access public
+	 * @return void
+	 */
 	public function CreateButtons()
 	{
 		global $modSettings, $txt, $context;
 
+		/* Call the language file */
 		loadLanguage('ShareThis');
 
 		/* Facebook */
@@ -112,22 +164,42 @@ class ShareThis
 		/* Add the buttons */
 		foreach($this->temp as $add)
 			$this->AddButton($add);
+
+		/* Done? then back to zero */
+		$this->temp = array();
 	}
 
-	/* Identifies how many buttons are in the array */
+	/**
+	 * Identifies how many buttons are in $build and returns the number
+	 *
+	 * @access private
+	 * @return int The number of buttons
+	 */
 	private function CountButtons()
 	{
 		return count($this->build);
 	}
 
-	/* Adds a button to the build array and set a unique id*/
+	/**
+	 * Adds a button to the build array and set a unique id
+	 *
+	 * @access private
+	 * @return void
+	 */
 	private function AddButton($button)
 	{
 		$button['id'] = $this->CountButtons();
 		$this->build[$button['id']] = $button;
 	}
 
-	/* If the button is not enable then don't show it */
+
+	/**
+	 * Checks the $build array and unset the values that aren't enable by the Admin
+	 *
+	 * If the button is not enable then don't show it
+	 * @access private
+	 * @return array A new array holding only the enable buttons
+	 */
 	private function Enable()
 	{
 		foreach($this->build as $button)
@@ -142,7 +214,15 @@ class ShareThis
 		return $this->prebuttons;
 	}
 
-	/* Use this if you want to show a single button, this will return raw code */
+	/**
+	 * Returns a single button's code
+	 *
+	 * Use this if you want to show a single button, this will return raw code without any format, you must specify the name of the button
+	 * you want to get, if a button does not exist it will return false
+	 * @access public
+	 * @param string The name of the button you want
+	 * @return string raw code for the button
+	 */
 	public function GetSingleButton($button)
 	{
 		if (in_array($button, $this->Enable()))
@@ -152,13 +232,23 @@ class ShareThis
 			return false;
 	}
 
-	/* Displays the HTML properly formatted */
+	/**
+	 * Displays the HTML properly formatted
+	 *
+	 * @access public
+	 * @return void
+	 */
 	public function Display()
 	{
 		return $this->HTML();
 	}
 
-	/* Format the buttons and return the HTML */
+	/**
+	 * Gives format to the buttons via a HTML list, adds the Javascript and return the final product
+	 *
+	 * @access public
+	 * @return array the html ready to be used
+	 */
 	private function HTML()
 	{
 		$this->final .= $this->JS() .'<div class="sharethis_'. $this->msgID .'" id="sharethis"><ul>';
@@ -171,7 +261,12 @@ class ShareThis
 		return $this->final;
 	}
 
-	/* Build the JavaScript for each message */
+	/**
+	 * Build the JavaScript for each message
+	 *
+	 * @access private
+	 * @return string the JavaScript code without any spaces or tabs.
+	 */
 	private function JS()
 	{
 		$js = '<script type="text/javascript">
@@ -194,7 +289,14 @@ class ShareThis
 		return $js = str_replace(array("\r\n", "\r", "\n", "\t"), '', $js);
 	}
 
-	/* Admin stuff and hooks */
+	/**
+	 * Builds the admin button via hooks
+	 *
+	 * @access public
+	 * @static
+	 * @param array The admin menu
+	 * @return void
+	 */
 	static function Admin(&$admin_areas)
 	{
 		global $txt;
@@ -213,6 +315,14 @@ class ShareThis
 		);
 	}
 
+	/**
+	 * Creates the pages for the admin panel via hooks
+	 *
+	 * @access public
+	 * @static
+	 * @param boolean
+	 * @return void
+	 */
 	static function SubActions($return_config = false)
 	{
 		global $txt, $scripturl, $context, $sourcedir;
@@ -245,14 +355,24 @@ class ShareThis
 
 	}
 
+	/**
+	 * The General settings page
+	 *
+	 * @access public
+	 * @static
+	 * @param boolean
+	 * @return void
+	 */
 	static function GeneralShareSettings($return_config = false)
 	{
 		global $txt, $scripturl, $context, $sourcedir;
 
 		loadLanguage('ShareThis');
 
+		/* We need this */
 		require_once($sourcedir . '/ManageServer.php');
 
+		/* Generate the settings */
 		$config_vars = array(
 			array('check', 'share_all_messages', 'subtext' => $txt['share_all_messages_sub']),
 			array('text', 'share_options_boards', 'size' => 36, 'subtext' => $txt['share_options_boards_sub']),
@@ -271,11 +391,13 @@ class ShareThis
 		if ($return_config)
 			return $config_vars;
 
+		/* Set some settings for the page */
 		$context['post_url'] = $scripturl . '?action=admin;area=sharethis;sa=general;save';
 		$context['page_title'] = $txt['share_default_menu'];
 
 		if (isset($_GET['save']))
 		{
+			/* Clean the boards var, we only want integers and nothing else! */
 			if (!empty($_POST['share_options_boards']))
 			{
 				$share_options_boards = explode(',', preg_replace('/[^0-9,]/', '', $_POST['share_options_boards']));
@@ -287,23 +409,33 @@ class ShareThis
 				$_POST['share_options_boards'] = implode(',', $share_options_boards);
 			}
 
+			/* Save the settings */
 			checkSession();
 			saveDBSettings($config_vars);
 			redirectexit('action=admin;area=sharethis;sa=general');
 		}
 
 		prepareDBSettingContext($config_vars);
-
 	}
 
+	/**
+	 * The Buttons settings page
+	 *
+	 * @access public
+	 * @static
+	 * @param boolean
+	 * @return void
+	 */
 	static function ButtonsShareSettings($return_config = false)
 	{
 		global $txt, $scripturl, $context, $sourcedir;
 
 		loadLanguage('ShareThis');
 
+		/* We need this */
 		require_once($sourcedir . '/ManageServer.php');
 
+		/* Generate the settings */
 		$config_vars = array(
 			array('check', 'share_buttons_enable', 'subtext' => $txt['share_buttons_enable_sub']),
 			'',
@@ -316,9 +448,11 @@ class ShareThis
 		if ($return_config)
 			return $config_vars;
 
+		/* Page settings */
 		$context['post_url'] = $scripturl . '?action=admin;area=sharethis;sa=buttons;save';
 		$context['page_title'] = $txt['share_default_menu'];
 
+		/* Save */
 		if (isset($_GET['save']))
 		{
 			checkSession();
@@ -328,7 +462,14 @@ class ShareThis
 		prepareDBSettingContext($config_vars);
 	}
 
-	/* DUH! WINNING! */
+	/**
+	 * Shows the mod's author copyright
+	 *
+	 * Show the copyright in the credits action,  ?action=credits
+	 * @access public
+	 * @static
+	 * @return string The copyright link
+	 */
 	static function ShareThisWho()
 	{
 		$MAS = '<a href="http://missallsunday.com" title="Free SMF Mods">Share This Topic mod &copy Suki</a>';
@@ -336,6 +477,14 @@ class ShareThis
 		return $MAS;
 	}
 
+	/**
+	 * Set all the necessary CSS and JavaScript
+	 *
+	 * Via $context['html_headers'] that means no template edits.
+	 * @access public
+	 * @static
+	 * @return void
+	 */
 	static function Headers()
 	{
 		global $modSettings, $context, $settings;
@@ -415,7 +564,7 @@ class ShareThis
 			'display',
 			'profile'
 		);
-		
+
 		/* We need an array */
 		if (!empty($modSettings['share_options_boards']))
 			$share_options_boards = explode(',', $modSettings['share_options_boards']);

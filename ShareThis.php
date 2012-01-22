@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.0
+ * @version 4.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -581,7 +581,6 @@ class ShareThis
 		/* @todo Let the admin decide what actions they want to share */
 		/* I'ts more easy to identify the actions where the script will be showed rather than the actions where it won't be showed */
 		$addthis_show = array(
-			'display',
 			'profile'
 		);
 
@@ -592,23 +591,10 @@ class ShareThis
 		else
 			$share_options_boards = array();
 
-		/* Show the script on a board or topic only if it isn't denied to show in the settings */
-		if (!empty($modSettings['share_addthisbutton_enable']) && !empty($context['current_board']) && !in_array($context['current_board'], $share_options_boards) && isset($_REQUEST['topic']) || isset($_REQUEST['board']))
+		/* This is a mess, I know! */
+		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !in_array($context['current_board'], $share_options_boards) || !empty($context['current_topic'])) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show)) || (!isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
 			$context['html_headers'] .= '
-			<script type="text/javascript">
-		jQuery(document).ready(function($)
-		{
-			jQuery(function()
-			{
-				jQuery(\'.navigate_section\').append(\'<span class="sharethis_addthis_script"><a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0f51eb17eb2a19"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" style="border:0"/></a></span>\');
-			});
-		});
-		</script>';
-
-		/* We aren't in a board and we are on a OK action */
-		elseif (!empty($modSettings['share_addthisbutton_enable']) && in_array($context['current_action'], $addthis_show) && empty($context['current_board']))
-			$context['html_headers'] .= '
-			<script type="text/javascript">
+		<script type="text/javascript">
 		jQuery(document).ready(function($)
 		{
 			jQuery(function()

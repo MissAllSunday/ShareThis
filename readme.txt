@@ -49,6 +49,13 @@ Simply install the package to install on the SMF Default Theme AND any other the
 
 [code]
 
+[b]4.1[/b]
+-Several bugs fixed
+-Added the AddThis script for messages too.
+-Added the forum name and the topic name in the twitter button
+-Added a check to disable the jquery effect (Show the buttons all the time)
+-Added an option to show the buttons above or below the messages.
+
 [b]4.0[/b]
 -Re-written code.
 -Compatible with SMF 2.0.x

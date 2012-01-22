@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.0
+ * @version 4.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -48,5 +48,3 @@
 
 foreach ($hooks as $hook => $function)
 	$call($hook, $function);
-
-?>

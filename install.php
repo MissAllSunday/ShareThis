@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1
+ * @version 4.1.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -40,7 +40,7 @@
 		exit('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
 	$hooks = array(
-		'integrate_pre_include' => '$boarddir/Sources/ShareThis.php',
+		'integrate_pre_include' => '$sourcedir/ShareThis.php',
 		'integrate_admin_areas' => 'ShareThis::Admin',
 	);
 

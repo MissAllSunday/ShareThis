@@ -49,6 +49,10 @@ Simply install the package to install on the SMF Default Theme AND any other the
 
 [code]
 
+[b]4.1.1[/b]
+-Fixed bug on install, silly bug, I know I shouldn't use $boarddir... copy/paste things from old code is evil!
+-Fixed bug on logic for showing the AddThis script.
+
 [b]4.1[/b]
 -Several bugs fixed
 -Added the AddThis script for messages too.

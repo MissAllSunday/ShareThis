@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1
+ * @version 4.1.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -592,7 +592,7 @@ class ShareThis
 			$share_options_boards = array();
 
 		/* This is a mess, I know! */
-		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !in_array($context['current_board'], $share_options_boards) || !empty($context['current_topic'])) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show)) || (!isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
+		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !in_array($context['current_board'], $share_options_boards) || !empty($context['current_topic'])) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show)) || (!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
 			$context['html_headers'] .= '
 		<script type="text/javascript">
 		jQuery(document).ready(function($)

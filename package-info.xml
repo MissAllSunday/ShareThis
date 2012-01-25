@@ -3,7 +3,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>Suki:Share_This_Topic</id>
 	<name>Share This Topic</name>
-	<version>4.1</version>
+	<version>4.1.1</version>
 	<type>modification</type>
 
 	<install for="2.0 - 2.0.99">

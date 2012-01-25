@@ -40,7 +40,7 @@
 		exit('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
 	$hooks = array(
-		'integrate_pre_include' => '$boarddir/Sources/ShareThis.php',
+		'integrate_pre_include' => '$sourcedir/ShareThis.php',
 		'integrate_admin_areas' => 'ShareThis::Admin',
 	);
 

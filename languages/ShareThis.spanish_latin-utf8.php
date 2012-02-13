@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1
+ * @version 4.1.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -36,25 +36,31 @@
 
 global $txt;
 
-// General strings
-$txt['share_default_menu'] = 'Comparte este tema';
-$txt['share_general_settings'] = 'Opciones generales';
-$txt['share_admin_panel_desc'] = 'Este es el panel de control del mod Share This Topic mod, desde aquí puedes configurar el mod para ajustarlo a tus necesidades,  "Opciones generales" contiene todas las opciones globales para este mod.';
-$txt['share_all_messages'] = '¿Mostrar los botones y los iconos en todos los mensajes?';
-$txt['share_all_messages_sub'] = 'Si se deja vacio, se mostrarán solo en el primer mensaje.';
-$txt['share_options_boards'] = 'Escribe el ID de los foros en los cuales este mod NO se mostrará.';
-$txt['share_options_boards_sub'] = 'Separados por coma, ejemplo: 1,2,3,4,  déjalo en blanco ara mostrar los iconos y botones en todos tus foros';
-$txt['share_options_position'] = 'Selecciona la posición para los botones.';
-$txt['share_options_position_sub'] = 'Arriba: Se mostrarán los botones arriba del mensaje.<br />Abajo: Se mostrarán los botones después del mensaje.';
-$txt['share_options_position_above'] = 'Arriba';
-$txt['share_options_position_below'] = 'Abajo';
-$txt['share_disable_jquery'] = 'Desactivar el script jQuery.';
-$txt['share_disable_jquery_sub'] = 'Esto desactivará el script jQuery haciendo que los botones estén siempre visibles.';
+/* General Settings */
+$txt['share_default_menu'] = 'Share This Topic';
+$txt['share_general_settings'] = 'General Settings';
+$txt['share_admin_panel_desc'] = 'This is the admin panel for the Share This Topic mod, from here you can configure the mod to suit your needs,  "General" page contains all the general settings fro this mod.';
+$txt['share_all_messages'] = 'Show the buttons every message?';
+$txt['share_all_messages_sub'] = 'If empty, the buttons and icons will be showed <strong>only</strong> in the first message.';
+$txt['share_options_boards'] = 'Write the ID of the boards you <strong>DO NOT</strong> want to show the buttons.';
+$txt['share_options_boards_sub'] = 'Comma separate, example: 1,2,3,4,  Leave it in blank to show the buttons on every board';
+$txt['share_options_position'] = 'Select the position for the buttons.';
+$txt['share_options_position_sub'] = 'Above: Will show the buttons before the actual message.<br />Below: Will show the buttons after the message.';
+$txt['share_options_position_above'] = 'Above';
+$txt['share_options_position_below'] = 'Below';
+$txt['share_disable_jquery'] = 'Disable the jQuery effect.';
+$txt['share_disable_jquery_sub'] = 'This will disable the jQuery effect making your buttons visible all the time.';
 
-// Buttons Settings
-$txt['share_buttons_settings'] = 'Opciones de botones';
-$txt['share_buttons_enable'] = 'Activar los botones.';
-$txt['share_buttons_enable_sub'] = 'Esta es la configuración maestra para los botones, marcala para activar los botones.';
-$txt['share_likebutton_enable'] = 'Activar el botón Facebook Like.';
-$txt['share_twibutton_enable'] = 'Activar el botón Tweet';
+/* Buttons Settings */
+$txt['share_buttons_settings'] = 'Button Settings';
+$txt['share_buttons_enable'] = 'Enable the share buttons.';
+$txt['share_buttons_enable_sub'] = 'This is the master setting for the buttons, check it to enable the buttons.';
+$txt['share_likebutton_enable'] = 'Enable the Facebook Like Button.';
+$txt['share_addthismessages_enable'] = 'Enable the AddThis script for the messages.';
+$txt['share_addthismessages_enable_sub'] = 'This will include the AddThis script along with the rest of the buttons.';
+$txt['share_addthisbutton_enable'] = 'Enable the AddThis script.';
+$txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-BoardIndex<br />-Profile<br />-Topic page.<br />
+the Addthis script will share the entire page rather than an specific part of the forum.';
+$txt['share_twibutton_enable'] = 'Enable the Tweet Button.';
+$txt['share_plusone_enable'] = 'Enable the Google Plus Button.';
 $txt['tweet_name'] = 'Tweet';

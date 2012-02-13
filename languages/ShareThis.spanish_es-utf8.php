@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1
+ * @version 4.1.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -36,25 +36,31 @@
 
 global $txt;
 
-// General strings
-$txt['share_default_menu'] = 'Comparte este tema';
+/* General Settings */
+$txt['share_default_menu'] = 'Share This Topic';
 $txt['share_general_settings'] = 'Opciones generales';
-$txt['share_admin_panel_desc'] = 'Este es el panel de control del mod Share This Topic mod, desde aquí puedes configurar el mod para ajustarlo a tus necesidades,  "Opciones generales" contiene todas las opciones globales para este mod.';
-$txt['share_all_messages'] = '¿Mostrar los botones y los iconos en todos los mensajes?';
-$txt['share_all_messages_sub'] = 'Si se deja vacio, se mostrarán solo en el primer mensaje.';
-$txt['share_options_boards'] = 'Escribe el ID de los foros en los cuales este mod NO se mostrará.';
-$txt['share_options_boards_sub'] = 'Separados por coma, ejemplo: 1,2,3,4,  déjalo en blanco ara mostrar los iconos y botones en todos tus foros';
-$txt['share_options_position'] = 'Selecciona la posición para los botones.';
-$txt['share_options_position_sub'] = 'Arriba: Se mostrarán los botones arriba del mensaje.<br />Abajo: Se mostrarán los botones después del mensaje.';
+$txt['share_admin_panel_desc'] = 'Este es el panel de administración para el mod Share This Topic, desde aquí podrás configurar el mod, la página "General" contiene opciones que afectan a todo el mod.';
+$txt['share_all_messages'] = '¿Mostrar los botones en cada mensaje?';
+$txt['share_all_messages_sub'] = 'Si no se marca esta opción, los botones aparecerán solamente en el primer mensaje de cada tema.';
+$txt['share_options_boards'] = 'Escribe el ID de los foros en donde <strong>NO</strong> quieres mostrar los botones.';
+$txt['share_options_boards_sub'] = 'Separados por commas, ejemplo: 1,2,3,4,  Déjalo en blanco para mostrar lso botones en todos tus foros.';
+$txt['share_options_position'] = 'Selecciona la posición de los botones.';
+$txt['share_options_position_sub'] = 'Arriba: Mostrará los botones antes de el mensaje, en la parte de arriba.<br />Debajo: mostrará los botones despiés del mensaje.';
 $txt['share_options_position_above'] = 'Arriba';
-$txt['share_options_position_below'] = 'Abajo';
-$txt['share_disable_jquery'] = 'Desactivar el script jQuery.';
-$txt['share_disable_jquery_sub'] = 'Esto desactivará el script jQuery haciendo que los botones estén siempre visibles.';
+$txt['share_options_position_below'] = 'Debajo';
+$txt['share_disable_jquery'] = 'Desactivar el efecto de jQuery.';
+$txt['share_disable_jquery_sub'] = 'Esto hará que los botones sean visibles todo el tiempo..';
 
-// Buttons Settings
-$txt['share_buttons_settings'] = 'Opciones de botones';
+/* Buttons Settings */
+$txt['share_buttons_settings'] = 'Configuración de los botones';
 $txt['share_buttons_enable'] = 'Activar los botones.';
-$txt['share_buttons_enable_sub'] = 'Esta es la configuración maestra para los botones, marcala para activar los botones.';
+$txt['share_buttons_enable_sub'] = 'Esta es la configuración central, necesitas activar esta opción para msotrar los botones.';
 $txt['share_likebutton_enable'] = 'Activar el botón Facebook Like.';
-$txt['share_twibutton_enable'] = 'Activar el botón Tweet';
+$txt['share_addthismessages_enable'] = 'Activar el script AddThis.';
+$txt['share_addthismessages_enable_sub'] = 'Esto incluirá el script junto con el resto de los botones.';
+$txt['share_addthisbutton_enable'] = 'Activar el script AddThis.';
+$txt['share_addthisbutton_enable_sub'] = 'Esto mostrará el script addthis en las siguentes páginas:<br />-BoardIndex<br />-Profile<br />-Topic page.<br />
+Este script compartirá toda la página en vez de sólo una sección.';
+$txt['share_twibutton_enable'] = 'Activar el botón de Twitter.';
+$txt['share_plusone_enable'] = 'Activar el botón Google Plus.';
 $txt['tweet_name'] = 'Tweet';

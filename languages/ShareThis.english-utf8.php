@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.0
+ * @version 4.1.1
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -36,7 +36,7 @@
 
 global $txt;
 
-// General strings
+/* General Settings */
 $txt['share_default_menu'] = 'Share This Topic';
 $txt['share_general_settings'] = 'General Settings';
 $txt['share_admin_panel_desc'] = 'This is the admin panel for the Share This Topic mod, from here you can configure the mod to suit your needs,  "General" page contains all the general settings fro this mod.';
@@ -51,11 +51,13 @@ $txt['share_options_position_below'] = 'Below';
 $txt['share_disable_jquery'] = 'Disable the jQuery effect.';
 $txt['share_disable_jquery_sub'] = 'This will disable the jQuery effect making your buttons visible all the time.';
 
-/* // Buttons Settings */
+/* Buttons Settings */
 $txt['share_buttons_settings'] = 'Button Settings';
 $txt['share_buttons_enable'] = 'Enable the share buttons.';
 $txt['share_buttons_enable_sub'] = 'This is the master setting for the buttons, check it to enable the buttons.';
 $txt['share_likebutton_enable'] = 'Enable the Facebook Like Button.';
+$txt['share_addthismessages_enable'] = 'Enable the AddThis script for the messages.';
+$txt['share_addthismessages_enable_sub'] = 'This will include the AddThis script along with the rest of the buttons.';
 $txt['share_addthisbutton_enable'] = 'Enable the AddThis script.';
 $txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-BoardIndex<br />-Profile<br />-Topic page.<br />
 the Addthis script will share the entire page rather than an specific part of the forum.';

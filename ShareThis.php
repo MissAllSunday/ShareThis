@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.1
+ * @version 4.1.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -404,6 +404,7 @@ class ShareThis
 				),
 				'subtext' => $txt['share_options_position_sub']
 			),
+			array('int', 'share_options_show_space', 'size' => 3, 'subtext' => $txt['share_options_show_space_sub']),
 			'',
 			array('check', 'share_addthisbutton_enable', 'subtext' => $txt['share_addthisbutton_enable_sub']),
 		);
@@ -428,6 +429,10 @@ class ShareThis
 
 				$_POST['share_options_boards'] = implode(',', $share_options_boards);
 			}
+
+			/* If for some reason the user put something like this:  12px, then remove the "px" part, we want only numbers! */
+			if (!empty($_POST['share_options_show_space']))
+				$_POST['share_options_show_space'] = preg_replace('/[^0-9,]/', '', $_POST['share_options_show_space']);
 
 			/* Save the settings */
 			checkSession();
@@ -530,6 +535,7 @@ class ShareThis
 	left:5px;
 	z-index:100;
 	min-height:30px;
+	'. (!empty($modSettings['share_options_show_space']) && !empty($modSettings['share_options_position']) && $modSettings['share_options_position'] == 'below' ? 'padding-top: '. $modSettings['share_options_show_space'] .'px' : '') . '
 }
 #sharethis ul
 {
@@ -592,7 +598,7 @@ class ShareThis
 			$share_options_boards = array();
 
 		/* This is a mess, I know! */
-		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !in_array($context['current_board'], $share_options_boards) || !empty($context['current_topic'])) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show)) || (!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
+		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !empty($context['current_topic']) && !in_array($context['current_board'], $share_options_boards)) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show) && empty($_REQUEST['area'])) || (!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
 			$context['html_headers'] .= '
 		<script type="text/javascript">
 		jQuery(document).ready(function($)

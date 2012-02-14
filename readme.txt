@@ -5,6 +5,7 @@
 originally created by [url=http://arantor.org/]Arantor[/url]
 further development by [url=missallsunday.com]Suki[/url]
 
+[b]This mod needs php 5.2 or greater[/b]
 
 [color=purple][b][size=12pt]License[/size][/b][/color]
 
@@ -48,6 +49,12 @@ Simply install the package to install on the SMF Default Theme AND any other the
 [size=12pt][color=purple]Changelog[/color][/size]
 
 [code]
+
+[b]4.1.2[/b]
+-Fixed issues with the Spanish_es/latin strings.
+-Fixed the Addthis script showing on the profile editing pages.
+-Moved the append after the call to parse_bbc() this should cover most of the problems with other mods.
+-Added an option to separate the message from the buttons, just enter any number, the higher the number the larger will be the space between the message and the buttons.
 
 [b]4.1.1[/b]
 -Fixed bug on install, silly bug, I know I shouldn't use $boarddir... copy/paste things from old code is evil!

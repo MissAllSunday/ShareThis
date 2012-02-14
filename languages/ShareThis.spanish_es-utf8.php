@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.1
+ * @version 4.1.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -44,17 +44,19 @@ $txt['share_all_messages'] = '¿Mostrar los botones en cada mensaje?';
 $txt['share_all_messages_sub'] = 'Si no se marca esta opción, los botones aparecerán solamente en el primer mensaje de cada tema.';
 $txt['share_options_boards'] = 'Escribe el ID de los foros en donde <strong>NO</strong> quieres mostrar los botones.';
 $txt['share_options_boards_sub'] = 'Separados por commas, ejemplo: 1,2,3,4,  Déjalo en blanco para mostrar lso botones en todos tus foros.';
+$txt['share_options_show_space'] = 'Incrementar el espacio entre el mensaje y los botones.';
+$txt['share_options_show_space_sub'] = 'Esto sólo es válido si seleccionaste la opción "Debajo" en la configuración previa</br><strong>Sólo usa números</strong>, entre más alto sea el número, más espacio aparecerá entre el mensaje y los botones.';
 $txt['share_options_position'] = 'Selecciona la posición de los botones.';
 $txt['share_options_position_sub'] = 'Arriba: Mostrará los botones antes de el mensaje, en la parte de arriba.<br />Debajo: mostrará los botones despiés del mensaje.';
 $txt['share_options_position_above'] = 'Arriba';
 $txt['share_options_position_below'] = 'Debajo';
 $txt['share_disable_jquery'] = 'Desactivar el efecto de jQuery.';
-$txt['share_disable_jquery_sub'] = 'Esto hará que los botones sean visibles todo el tiempo..';
+$txt['share_disable_jquery_sub'] = 'Esto hará que los botones sean visibles todo el tiempo.';
 
 /* Buttons Settings */
 $txt['share_buttons_settings'] = 'Configuración de los botones';
 $txt['share_buttons_enable'] = 'Activar los botones.';
-$txt['share_buttons_enable_sub'] = 'Esta es la configuración central, necesitas activar esta opción para msotrar los botones.';
+$txt['share_buttons_enable_sub'] = 'Esta es la configuración central, necesitas activar esta opción para mostrar los botones.';
 $txt['share_likebutton_enable'] = 'Activar el botón Facebook Like.';
 $txt['share_addthismessages_enable'] = 'Activar el script AddThis.';
 $txt['share_addthismessages_enable_sub'] = 'Esto incluirá el script junto con el resto de los botones.';

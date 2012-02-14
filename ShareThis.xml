@@ -3,7 +3,7 @@
 
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 	<id>Suki:Share_This_Topic</id>
-	<version>4.1.1</version>
+	<version>4.1.2</version>
 	<file name="$sourcedir/Display.php">
 	<operation>
 			<search position="replace"><![CDATA[global $memberContext, $context, $messages_request, $topic, $attachments, $topicinfo;]]></search>
@@ -11,7 +11,7 @@
 	global $board_info;]]></add>
 		</operation>
 		<operation>
-			<search position="after"><![CDATA[	// Do the censor thang.]]></search>
+			<search position="after"><![CDATA[// Compose the memory eat- I mean message array.]]></search>
 			<add><![CDATA[		/* Share This topic mod start */
 	if (!empty($modSettings['share_buttons_enable']))
 	{

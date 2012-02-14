@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.1
+ * @version 4.1.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -44,6 +44,8 @@ $txt['share_all_messages'] = 'Show the buttons every message?';
 $txt['share_all_messages_sub'] = 'If empty, the buttons and icons will be showed <strong>only</strong> in the first message.';
 $txt['share_options_boards'] = 'Write the ID of the boards you <strong>DO NOT</strong> want to show the buttons.';
 $txt['share_options_boards_sub'] = 'Comma separate, example: 1,2,3,4,  Leave it in blank to show the buttons on every board';
+$txt['share_options_show_space'] = 'Increase the space between the message and the buttons.';
+$txt['share_options_show_space_sub'] = 'This is only valid if you selected the "Below" option in the previous setting</br><strong>Use numbers only</strong>, the higher the number the larger will be the space between the message and the buttons.<br> Leave it in blank to use the default space.';
 $txt['share_options_position'] = 'Select the position for the buttons.';
 $txt['share_options_position_sub'] = 'Above: Will show the buttons before the actual message.<br />Below: Will show the buttons after the message.';
 $txt['share_options_position_above'] = 'Above';

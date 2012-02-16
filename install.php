@@ -39,6 +39,9 @@
 	elseif (!defined('SMF'))
 		exit('<b>Error:</b> Cannot install - please verify you put this in the same place as SMF\'s index.php.');
 
+	/* This mod needs php 5.2 or greater, sorry */
+	ShareThisCheck();
+
 	$hooks = array(
 		'integrate_pre_include' => '$sourcedir/ShareThis.php',
 		'integrate_admin_areas' => 'ShareThis::Admin',
@@ -46,5 +49,11 @@
 
 	$call = 'add_integration_function';
 
-foreach ($hooks as $hook => $function)
-	$call($hook, $function);
+	foreach ($hooks as $hook => $function)
+		$call($hook, $function);
+
+	function ShareThisCheck()
+	{
+		if (version_compare(PHP_VERSION, '5.2.0', '<'))
+			fatal_error('This mod needs PHP 5.2 or greater. You will not be able to install/use this mod, contact your host and ask for a php upgrade.');
+	}

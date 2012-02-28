@@ -59,26 +59,31 @@ class ShareThis
 	 * @access private
 	 */
 	private $build = array();
+
 	/**
 	 * @var int The message ID, used for identification.
 	 * @access private
 	 */
 	private $msgID;
+
 	/**
 	 * @var string The url to be used by the buttons
 	 * @access private
 	 */
 	private $url;
+
 	/**
 	 * @var array Used to store the initial data for the buttons.
 	 * @access private
 	 */
 	private $temp = array();
+
 	/**
 	 * @var array Holds only the usable buttons (those that are enable).
 	 * @access private
 	 */
 	private $prebuttons = array();
+
 	/**
 	 * @var string Holds the final HTML that will be displayed.
 	 * @access protected
@@ -96,7 +101,7 @@ class ShareThis
 	 */
 	function __construct($url, $msgID)
 	{
-		global $modSettings, $context;
+		global $context;
 
 		if (!empty($url))
 			$this->url = trim($url);
@@ -192,7 +197,6 @@ class ShareThis
 		$this->build[$button['id']] = $button;
 	}
 
-
 	/**
 	 * Checks the $build array and unset the values that aren't enable by the Admin
 	 *
@@ -236,7 +240,7 @@ class ShareThis
 	 * Displays the HTML properly formatted
 	 *
 	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public function Display()
 	{
@@ -584,12 +588,6 @@ class ShareThis
 		if (!empty($modSettings['share_twibutton_enable']) && !empty($modSettings['share_buttons_enable']))
 			$context['html_headers'] .= '<script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 
-		/* @todo Let the admin decide what actions they want to share */
-		/* I'ts more easy to identify the actions where the script will be showed rather than the actions where it won't be showed */
-		$addthis_show = array(
-			'profile'
-		);
-
 		/* We need an array */
 		if (!empty($modSettings['share_options_boards']))
 			$share_options_boards = explode(',', $modSettings['share_options_boards']);
@@ -598,7 +596,7 @@ class ShareThis
 			$share_options_boards = array();
 
 		/* This is a mess, I know! */
-		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !empty($context['current_topic']) && !in_array($context['current_board'], $share_options_boards)) || (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $addthis_show) && empty($_REQUEST['area'])) || (!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])))
+		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !empty($context['current_topic']) && in_array($_REQUEST['board'], $share_options_boards)) ||(!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])) || (isset($_REQUEST['topic']) && !empty($context['current_topic']) && !in_array($context['current_board'], $share_options_boards)))
 			$context['html_headers'] .= '
 		<script type="text/javascript">
 		jQuery(document).ready(function($)

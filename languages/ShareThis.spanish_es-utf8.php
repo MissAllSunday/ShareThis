@@ -61,7 +61,7 @@ $txt['share_likebutton_enable'] = 'Activar el botón Facebook Like.';
 $txt['share_addthismessages_enable'] = 'Activar el script AddThis.';
 $txt['share_addthismessages_enable_sub'] = 'Esto incluirá el script junto con el resto de los botones.';
 $txt['share_addthisbutton_enable'] = 'Activar el script AddThis.';
-$txt['share_addthisbutton_enable_sub'] = 'Esto mostrará el script addthis en las siguentes páginas:<br />-BoardIndex<br />-Profile<br />-Topic page.<br />
+$txt['share_addthisbutton_enable_sub'] = 'Esto mostrará el script addthis en las siguentes páginas:<br />-BoardIndex<br />-Topic page.<br />
 Este script compartirá toda la página en vez de sólo una sección.';
 $txt['share_twibutton_enable'] = 'Activar el botón de Twitter.';
 $txt['share_plusone_enable'] = 'Activar el botón Google Plus.';

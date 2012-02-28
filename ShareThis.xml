@@ -13,7 +13,7 @@
 		<operation>
 			<search position="after"><![CDATA[// Compose the memory eat- I mean message array.]]></search>
 			<add><![CDATA[		/* Share This topic mod start */
-	if (!empty($modSettings['share_buttons_enable']))
+	if (!empty($modSettings['share_buttons_enable']) && !WIRELESS)
 	{
 		/* We need an array */
 		if (!empty($modSettings['share_options_boards']))

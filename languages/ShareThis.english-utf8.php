@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.2
+ * @version 4.1.3
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -39,8 +39,9 @@ global $txt;
 /* General Settings */
 $txt['share_default_menu'] = 'Share This Topic';
 $txt['share_general_settings'] = 'General Settings';
-$txt['share_admin_panel_desc'] = 'This is the admin panel for the Share This Topic mod, from here you can configure the mod to suit your needs,  "General" page contains all the general settings fro this mod.';
-$txt['share_all_messages'] = 'Show the buttons every message?';
+$txt['share_admin_panel_desc'] = 'This is the admin panel for the Share This Topic mod, from here you can configure the mod to suit your needs.<br /> "General" page contains all the general settings for this mod.<br />
+"Button Settings" Let\'s you enable/disable each button as well as enable/disable all the buttons at once.';
+$txt['share_all_messages'] = 'Show the buttons on every message?';
 $txt['share_all_messages_sub'] = 'If empty, the buttons and icons will be showed <strong>only</strong> in the first message.';
 $txt['share_options_boards'] = 'Write the ID of the boards you <strong>DO NOT</strong> want to show the buttons.';
 $txt['share_options_boards_sub'] = 'Comma separate, example: 1,2,3,4,  Leave it in blank to show the buttons on every board';
@@ -61,7 +62,7 @@ $txt['share_likebutton_enable'] = 'Enable the Facebook Like Button.';
 $txt['share_addthismessages_enable'] = 'Enable the AddThis script for the messages.';
 $txt['share_addthismessages_enable_sub'] = 'This will include the AddThis script along with the rest of the buttons.';
 $txt['share_addthisbutton_enable'] = 'Enable the AddThis script.';
-$txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-BoardIndex<br />-Topic page.<br />
+$txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-Profile<br />-Message Index<br />-Board Index<br />-Topic page.<br />
 the Addthis script will share the entire page rather than an specific part of the forum.';
 $txt['share_twibutton_enable'] = 'Enable the Tweet Button.';
 $txt['share_plusone_enable'] = 'Enable the Google Plus Button.';

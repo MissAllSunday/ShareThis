@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.2
+ * @version 4.1.3
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -595,8 +595,26 @@ class ShareThis
 		else
 			$share_options_boards = array();
 
-		/* This is a mess, I know! */
-		if (!empty($modSettings['share_addthisbutton_enable']) && (!isset($_REQUEST['action']) && isset($_REQUEST['board']) && !empty($context['current_topic']) && in_array($_REQUEST['board'], $share_options_boards)) ||(!empty($modSettings['share_addthisbutton_enable']) && !isset($_REQUEST['topic']) && !isset($_REQUEST['board']) && !isset($_REQUEST['action'])) || (isset($_REQUEST['topic']) && !empty($context['current_topic']) && !in_array($context['current_board'], $share_options_boards)))
+		/* By default this is set to disable */
+		$AddThisEnable = false;
+
+		/* Are we in the profile action without any subaction? */
+		if ($context['current_action'] == 'profile' && !isset($_GET['sa']) && !isset($_GET['area']))
+			$AddThisEnable = true;
+
+		/* Are we in a topic? */
+		if (isset($_GET['topic']) && !isset($_GET['sa']) && !isset($_GET['action']))
+			$AddThisEnable = true;
+
+		/* Are we in a board? */
+		if (isset($_GET['board']) && !isset($_GET['sa']) && !isset($_GET['action']))
+			$AddThisEnable = true;
+
+		/* Are we in the BoardIndex? */
+		if (!isset($_GET['action']) && !isset($_GET['topic']) && !isset($_GET['board']))
+			$AddThisEnable = true;
+
+		if ($AddThisEnable && !empty($modSettings['share_addthisbutton_enable']))
 			$context['html_headers'] .= '
 		<script type="text/javascript">
 		jQuery(document).ready(function($)

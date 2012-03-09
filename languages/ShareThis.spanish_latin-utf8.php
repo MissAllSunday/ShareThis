@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.2
+ * @version 4.1.3
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -61,7 +61,7 @@ $txt['share_likebutton_enable'] = 'Enable the Facebook Like Button.';
 $txt['share_addthismessages_enable'] = 'Enable the AddThis script for the messages.';
 $txt['share_addthismessages_enable_sub'] = 'This will include the AddThis script along with the rest of the buttons.';
 $txt['share_addthisbutton_enable'] = 'Enable the AddThis script.';
-$txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-BoardIndex<br />-Topic page.<br />
+$txt['share_addthisbutton_enable_sub'] = 'This will add the addthis script below the menu on the following pages:<br />-Profile<br />-Message Index<br />-Board Index<br />-Topic page.<br />
 the Addthis script will share the entire page rather than an specific part of the forum.';
 $txt['share_twibutton_enable'] = 'Enable the Tweet Button.';
 $txt['share_plusone_enable'] = 'Enable the Google Plus Button.';

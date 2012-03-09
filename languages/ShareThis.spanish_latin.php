@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.2
+ * @version 4.1.3
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -61,7 +61,7 @@ $txt['share_likebutton_enable'] = 'Activar el bot&oacute;n Facebook Like.';
 $txt['share_addthismessages_enable'] = 'Activar el script AddThis.';
 $txt['share_addthismessages_enable_sub'] = 'Esto incluir&aacute; el script junto con el resto de los botones.';
 $txt['share_addthisbutton_enable'] = 'Activar el script AddThis.';
-$txt['share_addthisbutton_enable_sub'] = 'Esto mostrar&aacute; el script addthis en las siguentes p&aacute;ginas:<br />-BoardIndex<br />-Topic page.<br />
+$txt['share_addthisbutton_enable_sub'] = 'Esto mostrar&aacute; el script addthis en las siguentes p&aacute;ginas:<br />-Profile<br />-Message Index<br />-Board Index<br />-Topic page.<br />
 Este script compartir&aacute; toda la p&aacute;gina en vez de s&oacute;lo una secci&oacute;n.';
 $txt['share_twibutton_enable'] = 'Activar el bot&oacute;n de Twitter.';
 $txt['share_plusone_enable'] = 'Activar el bot&oacute;n Google Plus.';

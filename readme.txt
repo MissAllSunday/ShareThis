@@ -50,6 +50,9 @@ Simply install the package to install on the SMF Default Theme AND any other the
 
 [code]
 
+[b]4.1.3[/b]
+-Fixed once and for all the annoying AddThis bug
+
 [b]4.1.2[/b]
 -Fixed issues with the Spanish_es/latin strings.
 -Fixed the Addthis script showing on the profile editing pages.

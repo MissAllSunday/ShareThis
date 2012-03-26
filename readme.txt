@@ -50,6 +50,12 @@ Simply install the package to install on the SMF Default Theme AND any other the
 
 [code]
 
+[b]4.2[/b]
+-Added a way to show the buttons outside messages and topics.
+-Added an option to add custom buttons.
+-Added a "via" setting to specify the username in twitter button.
+-Added the board check the the AddThis Script.
+
 [b]4.1.3[/b]
 -Fixed once and for all the annoying AddThis bug
 

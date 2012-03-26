@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.3
+ * @version 4.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -66,3 +66,8 @@ Este script compartir&aacute; toda la p&aacute;gina en vez de s&oacute;lo una se
 $txt['share_twibutton_enable'] = 'Activar el bot&oacute;n de Twitter.';
 $txt['share_plusone_enable'] = 'Activar el bot&oacute;n Google Plus.';
 $txt['tweet_name'] = 'Tweet';
+
+/* Twitter options */
+$txt['share_twitter_options_dec'] = 'Opciones especificas para Twitter';
+$txt['share_twitter_options_via'] = 'Escribe el nombre de usuarios que quieras usar para el bot&oacute;n de Twitter, se se deja vacio se usar&aacute; el nombre de tu foro.';
+$txt['share_twitter_options_via_sub'] = 'Por ejemplo, si escribes: MissAllSuki el mensaje de Twitter aparecer&aacute; como: via @MissAllSuki, no es necesario escribir la @, s&oacute;lo el nombre de usuario';

@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.3
+ * @version 4.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -99,9 +99,9 @@ class ShareThis
 	 * @param int $msgID The message's unique ID
 	 * @return void
 	 */
-	function __construct($url, $msgID)
+	function __construct($url, $msgID = false)
 	{
-		global $context;
+		global $context, $modSettings;
 
 		if (!empty($url))
 			$this->url = trim($url);
@@ -109,11 +109,16 @@ class ShareThis
 		if (!empty($msgID))
 			$this->msgID = $msgID;
 
-		elseif (empty($url) || empty($msgID))
+		elseif (empty($url))
 			return;
 
-		/* Replace the spaces (if any) in the forum name to  make a cool "via @my_forum_name" for twitter */
-		$this->forum_name = str_replace(' ', '_', $context['forum_name']);
+		/* Does the user wants to use a custom via @username setting? */
+		if (!empty($modSettings['share_twitter_options_via']))
+			$this->twitter_via = $modSettings['share_twitter_options_via'];
+
+		/* No?  then use the forum name */
+		else
+			$this->twitter_via = str_replace(' ', '_', $context['forum_name']);
 	}
 
 	/**
@@ -123,11 +128,10 @@ class ShareThis
 	 * @global array $modSettings SMF's modSettings array
 	 * @global array $context SMF's context array
 	 * @global array $txt SMF's language strings array
-	 * @todo call a method to add custom buttons to the $temp array
 	 * @access public
 	 * @return void
 	 */
-	public function CreateButtons()
+	public function CreateButtons($custom = array())
 	{
 		global $modSettings, $txt, $context;
 
@@ -146,7 +150,7 @@ class ShareThis
 		$this->temp['twitter'] = array(
 			'name' => 'twitter',
 			'url' => $this->url,
-			'code' => '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'. $this->url .'" data-text="'. $context['page_title_html_safe'] .'" rel="canonical" data-via="'. $this->forum_name .'">'. $txt['tweet_name'] .'</a>',
+			'code' => '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'. $this->url .'" data-text="'. $context['page_title_html_safe'] .'" rel="canonical" data-via="'. $this->twitter_via .'">'. $txt['tweet_name'] .'</a>',
 			'enable' => !empty($modSettings['share_twibutton_enable']) ? 1 : 0,
 		);
 
@@ -166,6 +170,10 @@ class ShareThis
 			'enable' => !empty($modSettings['share_addthismessages_enable']) ? 1 : 0
 		);
 
+		/* Are there any custom buttons to add? */
+		if ($custom)
+			$this->AddCustomButton($custom);
+
 		/* Add the buttons */
 		foreach($this->temp as $add)
 			$this->AddButton($add);
@@ -183,6 +191,38 @@ class ShareThis
 	private function CountButtons()
 	{
 		return count($this->build);
+	}
+
+	/**
+	 * This method lets you add custom buttons to the temp array before the process begins
+	 *
+	 * @access private
+	 * @return void
+	 */
+	public function AddCustomButton($array)
+	{
+		if (empty($array))
+			return false;
+
+		/* Let's append the url to the button */
+		if ($this->IsMulti($array))
+			foreach ($array as $a)
+			{
+				$a['url'] = $this->url;
+				$a['code'] = sprintf($a['code'], $this->url);
+
+				/* Add the button to the temp array */
+				$this->temp[] = $a;
+			}
+
+		else
+		{
+			$array['url'] = $this->url;
+			$array['code'] = sprintf($array['code'], $this->url);
+
+			/* Add the button to the temp array */
+			$this->temp[] = $array;
+		}
 	}
 
 	/**
@@ -248,14 +288,25 @@ class ShareThis
 	}
 
 	/**
+	 * Displays the HTML properly formatted for custom display
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function CustomDisplay()
+	{
+		return $this->HTML(true);
+	}
+
+	/**
 	 * Gives format to the buttons via a HTML list, adds the Javascript and return the final product
 	 *
 	 * @access public
 	 * @return array the html ready to be used
 	 */
-	private function HTML()
+	private function HTML($custom = false)
 	{
-		$this->final .= $this->JS() .'<div class="sharethis_'. $this->msgID .'" id="sharethis"><ul>';
+		$this->final .= ($custom ? '' : $this->JS()) .'<div class="sharethis_'. ($custom ? '' : $this->msgID) .'" id="sharethis'. ($custom ? 'custom' : '') .'"><ul>';
 
 		foreach($this->Enable() as $a)
 			$this->final .= '<li class="sharethis_'. $a['name'] .'">'. $a['code'] .'</li>';
@@ -294,7 +345,6 @@ class ShareThis
 				});
 			});
 			</script>';
-
 		}
 
 		/* We just need the overflow */
@@ -471,7 +521,10 @@ class ShareThis
 			array('check', 'share_plusone_enable'),
 			array('check', 'share_twibutton_enable'),
 			array('check', 'share_likebutton_enable'),
-			array('check', 'share_addthismessages_enable', 'subtext' => $txt['share_addthismessages_enable_sub'])
+			array('check', 'share_addthismessages_enable', 'subtext' => $txt['share_addthismessages_enable_sub']),
+			'',
+			$txt['share_twitter_options_dec'],
+			array('text', 'share_twitter_options_via', 'size' => 20, 'subtext' => $txt['share_twitter_options_via_sub']),
 		);
 
 		if ($return_config)
@@ -484,6 +537,10 @@ class ShareThis
 		/* Save */
 		if (isset($_GET['save']))
 		{
+			/* Just an extra check... */
+			if (isset($_POST['share_twitter_options_via']))
+				$_POST['share_twitter_options_via'] = str_replace('@', '', $_POST['share_twitter_options_via']);
+
 			checkSession();
 			saveDBSettings($config_vars);
 			redirectexit('action=admin;area=sharethis;sa=buttons');
@@ -541,7 +598,16 @@ class ShareThis
 	min-height:30px;
 	'. (!empty($modSettings['share_options_show_space']) && !empty($modSettings['share_options_position']) && $modSettings['share_options_position'] == 'below' ? 'padding-top: '. $modSettings['share_options_show_space'] .'px' : '') . '
 }
-#sharethis ul
+#sharethiscustom
+{
+	position:relative;
+	top:5px;
+	left:5px;
+	z-index:100;
+	min-height:30px;
+}
+
+#sharethis ul, #sharethiscustom ul
 {
 	margin: 0;
 	padding: 0;
@@ -549,12 +615,12 @@ class ShareThis
 	text-align: left;
 	list-style-position:inside !important;
 }
-#sharethis ul li
+#sharethis ul li, #sharethiscustom ul li
 {
 	display: inline;
 }
 '. (!empty($modSettings['share_addthismessages_enable']) ? '
-#sharethis ul li.sharethis_addthis
+#sharethis ul li.sharethis_addthis, #sharethiscustom ul li.sharethis_addthis
 {
 	float:left;
 	margin-right:15px;
@@ -603,11 +669,11 @@ class ShareThis
 			$AddThisEnable = true;
 
 		/* Are we in a topic? */
-		if (isset($_GET['topic']) && !isset($_GET['sa']) && !isset($_GET['action']))
+		if (isset($_GET['topic']) && !isset($_GET['sa']) && !isset($_GET['action']) && isset($context['current_board']) && !in_array($context['current_board'], $share_options_boards))
 			$AddThisEnable = true;
 
 		/* Are we in a board? */
-		if (isset($_GET['board']) && !isset($_GET['sa']) && !isset($_GET['action']))
+		if (isset($_GET['board']) && !isset($_GET['sa']) && !isset($_GET['action']) && isset($context['current_board']) && !in_array($context['current_board'], $share_options_boards))
 			$AddThisEnable = true;
 
 		/* Are we in the BoardIndex? */
@@ -625,6 +691,15 @@ class ShareThis
 			});
 		});
 		</script>';
+	}
+
+	private function IsMulti($a)
+	{
+		foreach ($a as $v)
+			if (is_array($v))
+				return true;
+
+		return false;
 	}
 }
 	/* Se que volverás el día

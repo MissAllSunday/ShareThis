@@ -2,7 +2,7 @@
 
 /**
  * @package ShareThis Topic mod
- * @version 4.1.3
+ * @version 4.2
  * @author Suki <missallsunday@simplemachines.org>
  * @copyright 2011 Suki
  * @license http://www.mozilla.org/MPL/ MPL 1.1
@@ -67,3 +67,8 @@ the Addthis script will share the entire page rather than an specific part of th
 $txt['share_twibutton_enable'] = 'Enable the Tweet Button.';
 $txt['share_plusone_enable'] = 'Enable the Google Plus Button.';
 $txt['tweet_name'] = 'Tweet';
+
+/* Twitter options */
+$txt['share_twitter_options_dec'] = 'Twitter specific options';
+$txt['share_twitter_options_via'] = 'Write the specific twitter username that will be used for the twitter button, if empty, it will show the forum name.';
+$txt['share_twitter_options_via_sub'] = 'For example, if you type: MissAllSuki the twitter buttons will appear as via @MissAllSuki, don\'t include the @, just the username';

@@ -1,6 +1,6 @@
 [center][color=purple][size=15pt]Share this Topic[/size][/color] [/center]
 
-[url=http://custom.simplemachines.org/mods/index.php?mod=2111]Link to mod [/url] | [url=http://www.simplemachines.org/community/index.php?topic=334955.0]Comments on this Mod[/url] 
+[url=http://custom.simplemachines.org/mods/index.php?mod=2111]Link to mod [/url] | [url=http://www.simplemachines.org/community/index.php?topic=334955.0]Comments on this Mod[/url]
 
 originally created by [url=http://arantor.org/]Arantor[/url]
 further development by [url=missallsunday.com]Suki[/url]
@@ -9,11 +9,10 @@ further development by [url=missallsunday.com]Suki[/url]
 
 [color=purple][b][size=12pt]License[/size][/b][/color]
 
- * This SMF modification is subject to the Mozilla Public License Version
- * 1.1 (the "License"); you may not use this SMF modification except in compliance with
- * the License. You may obtain a copy of the License at
- * http://www.mozilla.org/MPL/
- 
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/
+
 This mod uses the hoverIntent jQuery Plug-in http://cherne.net/brian/resources/jquery.hoverIntent.html
 
 
@@ -38,14 +37,14 @@ o British/utf8
 o Spanish_es/utf8
 o Spanish_latin/utf8
 
-I welcome translations, please post it on the support post ;) 
+I welcome translations, please post it on the support post ;)
 
 
 [size=12pt][color=purple]Installation[/color][/size]
 
 Simply install the package to install on the SMF Default Theme AND any other theme!
 
- 
+
 [size=12pt][color=purple]Changelog[/color][/size]
 
 [code]
@@ -131,7 +130,7 @@ Simply install the package to install on the SMF Default Theme AND any other the
 -remove social networks no longer available.
 -remove settings no longer needed.
 -fixed problem with Spanish non utf8 language.
--minor bugs fixed. 
+-minor bugs fixed.
 -now you can include the icons and buttons on your news/articles of any portal.
 
 [b]2.3[/b]
@@ -180,7 +179,7 @@ Simply install the package to install on the SMF Default Theme AND any other the
 Added support for the following sites:
 -Google
 -Yahoo
--Technorati 
+-Technorati
 -Ma.gnolia
 Added spanish language
 Moved the icons above the title of the topic

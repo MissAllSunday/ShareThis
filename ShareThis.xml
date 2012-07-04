@@ -65,8 +65,8 @@
 
 	<file name="$sourcedir/Who.php">
 	<operation>
-			<search position="replace"><![CDATA[		'mods' => array(]]></search>
-			<add><![CDATA[		'mods' => array(
+			<search position="replace"><![CDATA['mods' => array(]]></search>
+			<add><![CDATA['mods' => array(
 			Sharethis::ShareThisWho(),]]></add>
 		</operation>
 	</file>

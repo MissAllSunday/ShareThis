@@ -326,9 +326,9 @@ class ShareThis
 					jQuery("#msg_'. $this->msgID .'").hoverIntent(function()
 					{
 					jQuery("#msg_'. $this->msgID .'").css("overflow-y", "hidden");
-					jQuery(".sharethis_'. $this->msgID .'").delay(100).fadeIn();
+					jQuery(".sharethis_'. $this->msgID .'").fadeIn();
 					},function(){
-							jQuery(".sharethis_'. $this->msgID .'").delay(300).fadeOut();
+							jQuery(".sharethis_'. $this->msgID .'").fadeOut();
 						});
 				});
 			});

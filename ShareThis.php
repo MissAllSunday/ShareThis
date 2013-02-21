@@ -130,7 +130,7 @@ class ShareThis
 		$this->temp['facebook'] = array(
 			'name' => 'facebook',
 			'url' => $this->url,
-			'code' => '<iframe src="http://www.facebook.com/plugins/like.php?href='. $this->url .'&amp;layout=standard&amp;show_faces=false$amp;send=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=:80" scrolling="no" frameborder="0" style="border:none; overflow:visible; width:350px; height:80px;" allowTransparency="true"></iframe>',
+			'code' => '<iframe src="http://www.facebook.com/plugins/like.php?href='. $this->url .'&amp;layout=standard&amp;show_faces=false$amp;send=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:visible; width:350px; height:80px;" allowTransparency="true"></iframe>',
 			'enable' => !empty($modSettings['share_likebutton_enable']) ? 1 : 0
 		);
 
@@ -299,7 +299,7 @@ class ShareThis
 		foreach($this->Enable() as $a)
 			$this->final .= '<li class="sharethis_'. $a['name'] .'">'. $a['code'] .'</li>';
 
-		$this->final .= '</div>';
+		$this->final .= '</ul></div>';
 
 		return $this->final;
 	}

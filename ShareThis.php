@@ -176,7 +176,7 @@ class ShareThis
 	 * @access private
 	 * @return int The number of buttons
 	 */
-	private function CountButtons()
+	protected function CountButtons()
 	{
 		return count($this->build);
 	}
@@ -219,7 +219,7 @@ class ShareThis
 	 * @access private
 	 * @return void
 	 */
-	private function AddButton($button)
+	protected function AddButton($button)
 	{
 		$button['id'] = $this->CountButtons();
 		$this->build[$button['id']] = $button;
@@ -232,7 +232,7 @@ class ShareThis
 	 * @access private
 	 * @return array A new array holding only the enable buttons
 	 */
-	private function Enable()
+	protected function Enable()
 	{
 		foreach($this->build as $button)
 		{
@@ -292,7 +292,7 @@ class ShareThis
 	 * @access public
 	 * @return array the html ready to be used
 	 */
-	private function HTML($custom = false)
+	protected function HTML($custom = false)
 	{
 		$this->final .= ($custom ? '' : $this->JS()) .'<div class="sharethis_'. ($custom ? '' : $this->msgID) .'" id="sharethis'. ($custom ? 'custom' : '') .'"><ul>';
 
@@ -311,7 +311,7 @@ class ShareThis
 	 * @global array $modSettings
 	 * @return string the JavaScript code without any spaces or tabs.
 	 */
-	private function JS()
+	protected function JS()
 	{
 		global $modSettings;
 
@@ -681,7 +681,7 @@ class ShareThis
 		</script>';
 	}
 
-	private function IsMulti($a)
+	protected function IsMulti($a)
 	{
 		foreach ($a as $v)
 			if (is_array($v))
